@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Simples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculadora {
+            background-color: #000000;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+        }
+        #display {
+            width: 100%;
+            height: 50px;
+            background-color: #fff;
+            font-size: 24px;
+            text-align: right;
+            padding: 5px;
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            border: none;
+            border-radius: 5px;
+        }
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #e0e0e0;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #d4d4d4;
+        }
+        button.operador {
+            background-color: #ff9500;
+            color: white;
+        }
+        button.operador:hover {
+            background-color: #ff9102;
+        }
+        button.limpar {
+            background-color: #ff3b30;
+            color: white;
+        }
+        button.limpar:hover {
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculadora">
+    <input type="text" id="display" readonly>
+    <div class="botoes">
+        <button class="limpar" onclick="limparTela()">C</button>
+        <button onclick="adicionarValor('/')" class="operador">÷</button>
+        <button onclick="adicionarValor('*')" class="operador">×</button>
+        <button onclick="apagarUltimo()" class="operador">DEL</button>
+
+        <button onclick="adicionarValor('7')">7</button>
+        <button onclick="adicionarValor('8')">8</button>
+        <button onclick="adicionarValor('9')">9</button>
+        <button onclick="adicionarValor('-')" class="operador">-</button>
+
+        <button onclick="adicionarValor('4')">4</button>
+        <button onclick="adicionarValor('5')">5</button>
+        <button onclick="adicionarValor('6')">6</button>
+        <button onclick="adicionarValor('+')" class="operador">+</button>
+
+        <button onclick="adicionarValor('1')">1</button>
+        <button onclick="adicionarValor('2')">2</button>
+        <button onclick="adicionarValor('3')">3</button>
+        <button onclick="calcularResult()" class="operador" style="grid-row: span 2; height: 100%;">=</button>
+
+        <button onclick="adicionarValor('0')" style="grid-column: span 2;">0</button>
+        <button onclick="adicionarValor('.')">.</button>
+    </div>
+</div>
+
+<script>
+    const display = document.getElementById('display');
+
+    function adicionarValor(valor) {
+        display.value += valor;
+    }
+
+    function limparTela() {
+        display.value = '';
+    }
+
+    function apagarUltimo() {
+        display.value = display.value.slice(0, -1);
+    }
+
+    function calcularResult() {
+        try {
+            display.value = eval(display.value);
+        } catch (error) {
+            display.value = 'Erro';
+        }
+    }
+</script>
+
+</body>
+</html>
